@@ -2,9 +2,9 @@ let keys = [];
 
 document.addEventListener("keydown",
     function (e) {
-        if (!game.isRunning) {
+        if (game !== undefined && !game.isRunning) {
             game.isRunning = true;
-            game.move = setInterval(game.ball.moveBall, 1000, game.ball);
+            game.move = setInterval(game.ball.moveBall, 10, game.ball);
         }
         if (keys.includes(e.key) === false) {
             if (e.key == "Tab") {
