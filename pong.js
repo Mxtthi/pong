@@ -2,6 +2,7 @@ class Game {
     constructor() {
         this.isRunning = false;
         this.isPaused = false;
+        this.movement = window.innerHeight / 100;
         this.score = { "player1": 0, "player2": 0 }
 
         this.ball = new Ball();
@@ -19,36 +20,8 @@ class Game {
 
         console.log(game.ball.getPos(elem));
         console.log(elem.style.top)
-        if (direction == "up") elem.style.top = parseFloat(elem.style.top.slice(0, -2)) - 15 + "px";
-        if (direction == "down") elem.style.top = parseFloat(elem.style.top.slice(0, -2)) + 15 + "px";
-    }
-
-    input(e) {
-        if (!game.isRunning) {
-            game.isRunning = true;
-            game.move = setInterval(game.ball.moveBall, 1000, game.ball);
-        }
-
-        switch (e.key.toLowerCase()) {
-            case "space":
-                game.isPaused = !game.isPaused;
-                break;
-            case "tab":
-                //restart game
-                break;
-            case "w":
-                game.movePlattform("player1", "up");
-                break;
-            case "s":
-                game.movePlattform("player1", "down");
-                break;
-            case "arrowup":
-                game.movePlattform("player2", "up");
-                break;
-            case "arrowdown":
-                game.movePlattform("player2", "down");
-                break;
-        }
+        if (direction == "up") elem.style.top = parseFloat(elem.style.top.slice(0, -2)) - this.movement + "px";
+        if (direction == "down") elem.style.top = parseFloat(elem.style.top.slice(0, -2)) + this.movement + "px";
     }
 }
 
