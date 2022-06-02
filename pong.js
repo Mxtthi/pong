@@ -14,14 +14,14 @@ class Game {
     }
 
     movePlattform(player, direction) {
-        let elem = document.getElementById(player);
-
+        let elem = document.getElementById(player), res;
         if (elem.style.top == "") elem.style.top = game.ball.getPos(elem).y + "px";
-
-        console.log(game.ball.getPos(elem));
-        console.log(elem.style.top)
-        if (direction == "up") elem.style.top = parseFloat(elem.style.top.slice(0, -2)) - this.movement + "px";
-        if (direction == "down") elem.style.top = parseFloat(elem.style.top.slice(0, -2)) + this.movement + "px";
+        if (direction == "up") res = parseFloat(elem.style.top.slice(0, -2)) - this.movement;
+        if (direction == "down") res = parseFloat(elem.style.top.slice(0, -2)) + this.movement;
+        console.log(res, window.innerHeight / 10)
+        if (res < window.innerHeight - window.innerHeight / 10 && res > 0) {
+            elem.style.top = res + "px";
+        }
     }
 }
 

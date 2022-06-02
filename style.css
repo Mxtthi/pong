@@ -15,8 +15,8 @@ body {
 .block {
     position: absolute;
     background-color: rgb(255, 255, 255);
-    width: 5px;
-    height: 100px;
+    width: 0.2vw;
+    height: 10vh;
 }
 
 .circle {
