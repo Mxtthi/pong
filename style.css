@@ -1,0 +1,31 @@
+body {
+    background-color: rgb(82, 82, 82);
+}
+
+#player1 {
+    left: 10vw;
+    top: 50vh;
+}
+
+#player2 {
+    right: 10vw;
+    top: 50vh;
+}
+
+.block {
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    width: 5px;
+    height: 100px;
+}
+
+.circle {
+    position: absolute;
+    border: 3px solid white;
+    background-color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
