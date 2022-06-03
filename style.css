@@ -5,10 +5,27 @@ body {
     font-family: 'Libre Franklin', sans-serif;
 }
 
-#score {
+#settings {
+    top: 50%;
+    font-size: 32px;
+}
+
+.centered {
+    left: 0;
+    line-height: 200px;
+    margin-top: -100px;
     position: absolute;
-    left: 50vw;
-    top: 2vh;
+    text-align: center;
+    width: 100%;
+}
+
+#settings input {
+    height: 5vh;
+    width: 5vw;
+}
+
+#score {
+    top: 5vh;
     font-size: 32px;
 }
 
@@ -19,30 +36,40 @@ body {
 }
 
 #gameWon {
-    left: 0;
-    line-height: 200px;
-    margin-top: -100px;
-    position: absolute;
-    text-align: center;
     top: 50%;
-    width: 100%;
     font-size: 32px;
 }
 
 #player1 {
     left: 5vw;
-    top: 50vh;
 }
 
 #player2 {
     right: 5vw;
-    top: 50vh;
+}
+
+.outline {
+    position: absolute;
+    top: 0;
+    width: 4vw;
+    height: 100vh;
+}
+
+#outlineLeft{
+    left: 0;
+    background-color: blue;
+}
+
+#outlineRight{
+    right: 0;
+    background-color: red;
 }
 
 .block {
+    top: 50vh;
     position: absolute;
     background-color: rgb(255, 255, 255);
-    width: 0.2vw;
+    width: 0.3vw;
     height: 15vh;
 }
 

@@ -5,10 +5,10 @@ document.addEventListener("keydown",
         if (game !== undefined && !game.isRunning && !game.isFinished) {
             game.isRunning = true;
             document.getElementById("gameWon").innerHTML = "";
-            game.move = setInterval(game.ball.moveBall, 2.5, game.ball);
-            game.pauseCheck = setInterval(game.pauseOrContinueGame, 10);
+            game.move = setInterval(game.ball.moveBall, 3, game.ball);
+            game.pauseCheck = setInterval(game.pauseOrContinueGame, 1);
         }
-        if (keys.includes(e.key) === false) {
+        if (game !== undefined && keys.includes(e.key) === false) {
             if (e.key == "Tab") {
                 e.preventDefault();
                 game.restart();
@@ -30,7 +30,7 @@ document.addEventListener("keyup",
     false);
 
 setInterval(() => {
-    if (!game.isPaused) {
+    if (game !== undefined && !game.isPaused) {
         for (let i = 0; i < keys.length; i++) {
             switch (keys[i].toLowerCase()) {
                 case "w":
@@ -39,11 +39,23 @@ setInterval(() => {
                 case "s":
                     game.movePlattform("player1", "down");
                     break;
-                case "arrowup":
+                case "h":
                     game.movePlattform("player2", "up");
                     break;
-                case "arrowdown":
+                case "n":
                     game.movePlattform("player2", "down");
+                    break;
+                case "ü":
+                    game.movePlattform("player3", "up");
+                    break;
+                case "ä":
+                    game.movePlattform("player3", "down");
+                    break;
+                case "arrowup":
+                    game.movePlattform("player4", "up");
+                    break;
+                case "arrowdown":
+                    game.movePlattform("player4", "down");
                     break;
             }
         }

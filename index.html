@@ -20,13 +20,16 @@
 
 <body>
 
-    <p id="score" class="unselectable">0 - 0</p>
-    <p id="gameWon" class="unselectable"></p>
-    <input type="button" id="restart" onclick="game.restart()" value="Restart">
+    <div id="outlineLeft" class="outline"></div>
+    <div id="outlineRight" class="outline"></div>
 
-    <div id="player1" class="block unselectable"></div>
+    <div id="settings" class="centered">
+        <input type="button" id="2P" value="2P">
+        <input type="button" id="4P" value="4P">
+    </div>
 
-    <div id="player2" class="block unselectable"></div>
+    <p id="score" class="unselectable centered">0 - 0</p>
+    <p id="gameWon" class="unselectable centered"></p>
 
 </body>
 
