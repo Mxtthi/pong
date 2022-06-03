@@ -5,7 +5,7 @@ document.addEventListener("keydown",
         if (game !== undefined && !game.isRunning && !game.isFinished) {
             game.isRunning = true;
             document.getElementById("gameWon").innerHTML = "";
-            game.move = setInterval(game.ball.moveBall, 10, game.ball);
+            game.move = setInterval(game.ball.moveBall, 2.5, game.ball);
             game.pauseCheck = setInterval(game.pauseOrContinueGame, 10);
         }
         if (keys.includes(e.key) === false) {

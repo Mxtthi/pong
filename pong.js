@@ -3,6 +3,7 @@ class Game {
         this.isRunning = false;
         this.isPaused = false;
         this.isFinished = false;
+        this.lastHit;
         this.movement = window.innerHeight / 100;
         this.score = { "player1": 0, "player2": 0 }
 
@@ -36,7 +37,7 @@ class Game {
             document.getElementById("gameWon").innerHTML = "Paused";
         } else if (game.isPaused == false && game.isRunning == true && game.move == "") {
             document.getElementById("gameWon").innerHTML = "";
-            game.move = setInterval(game.ball.moveBall, 10, game.ball);
+            game.move = setInterval(game.ball.moveBall, 2.5, game.ball);
         }
     }
 
@@ -91,10 +92,15 @@ class Ball {
 
     moveBall() {
         if (game.ball.xSpeed == 0 && game.ball.ySpeed == 0) {
-            game.ball.xSpeed = window.innerWidth / game.ball.getRandomInt(200, 500);
-            game.ball.ySpeed = window.innerHeight / game.ball.getRandomInt(100, 1000);
+            game.ball.xSpeed = window.innerWidth / game.ball.getRandomInt(200, 500) / 2;
+            game.ball.ySpeed = window.innerHeight / game.ball.getRandomInt(100, 1000) / 2;
             console.log(game.ball.ySpeed);
-            if (game.ball.getRandomInt(0, 1) == 0) game.ball.xSpeed *= -1;
+            if (game.ball.getRandomInt(0, 1) == 0) {
+                game.ball.xSpeed *= -1;
+                game.lastHit = "P2";
+            } else {
+                game.lastHit = "P1";
+            }
             if (game.ball.getRandomInt(0, 1) == 0) game.ball.ySpeed *= -1;
         }
 
@@ -119,16 +125,34 @@ class Ball {
             }
         };
 
-        if (game.ball.y <= 0 || game.ball.y >= window.innerHeight - window.innerHeight / 50) game.ball.changeDirection("y");
-        if (game.checkIfElementsOverlap(ball, p1) || game.checkIfElementsOverlap(ball, p2)) game.ball.changeDirection("x");
+        if (game.ball.y <= 0 || game.ball.y >= window.innerHeight - window.innerHeight / 50) {
+            game.ball.changeDirection("y");
+        }
+        if (game.checkIfElementsOverlap(ball, p1)) {
+            if (game.lastHit == "P1") {
+                return;
+            }
+            else {
+                game.lastHit = "P1";
+                game.ball.changeDirection("x");
+            }
+        }
+        if (game.checkIfElementsOverlap(ball, p2)) {
+            if (game.lastHit == "P2") {
+                return;
+            }
+            else {
+                game.lastHit = "P2";
+                game.ball.changeDirection("x");
+            }
+        }
     }
 
     changeDirection(axis) {
         if (axis == "x") {
-            console.log(game.ball.xSpeed, window.innerHeight / 250)
-            if (game.ball.xSpeed > 0 && game.ball.xSpeed < window.innerWidth / 200 || game.ball.xSpeed < 0 && game.ball.xSpeed * -1 < window.innerWidth / 200) {
+            if (game.ball.xSpeed > 0 && game.ball.xSpeed < window.innerWidth / 200 / 2 || game.ball.xSpeed < 0 && game.ball.xSpeed * -1 < window.innerWidth / 200 / 2) {
                 game.ball.xSpeed *= 2;
-            } else if (game.ball.xSpeed < window.innerWidth / 50) {
+            } else if (game.ball.xSpeed < window.innerWidth / 50 / 2) {
                 game.ball.xSpeed *= 1.05;
             } else {
                 game.ball.xSpeed *= 1.01;
