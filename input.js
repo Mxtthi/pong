@@ -13,7 +13,7 @@ document.addEventListener("keydown",
                 e.preventDefault();
                 game.restart();
             }
-            if (e.key == " ") {
+            if (e.key == " " && !game.isFinished) {
                 e.preventDefault();
                 game.isPaused = !game.isPaused;
                 console.log(game.isPaused)
@@ -32,31 +32,48 @@ document.addEventListener("keyup",
 setInterval(() => {
     if (game !== undefined && !game.isPaused) {
         for (let i = 0; i < keys.length; i++) {
-            switch (keys[i].toLowerCase()) {
-                case "w":
-                    game.movePlattform("player1", "up");
-                    break;
-                case "s":
-                    game.movePlattform("player1", "down");
-                    break;
-                case "h":
-                    game.movePlattform("player2", "up");
-                    break;
-                case "n":
-                    game.movePlattform("player2", "down");
-                    break;
-                case "ü":
-                    game.movePlattform("player3", "up");
-                    break;
-                case "ä":
-                    game.movePlattform("player3", "down");
-                    break;
-                case "arrowup":
-                    game.movePlattform("player4", "up");
-                    break;
-                case "arrowdown":
-                    game.movePlattform("player4", "down");
-                    break;
+            if (game.player < 4) {
+                switch (keys[i].toLowerCase()) {
+                    case "w":
+                        game.movePlattform("player1", "up");
+                        break;
+                    case "s":
+                        game.movePlattform("player1", "down");
+                        break;
+                    case "arrowup":
+                        game.movePlattform("player2", "up");
+                        break;
+                    case "arrowdown":
+                        game.movePlattform("player2", "down");
+                        break;
+                }
+            } else {
+                switch (keys[i].toLowerCase()) {
+                    case "w":
+                        game.movePlattform("player1", "up");
+                        break;
+                    case "s":
+                        game.movePlattform("player1", "down");
+                        break;
+                    case "h":
+                        game.movePlattform("player2", "up");
+                        break;
+                    case "n":
+                        game.movePlattform("player2", "down");
+                        break;
+                    case "ü":
+                        game.movePlattform("player3", "up");
+                        break;
+                    case "ä":
+                        game.movePlattform("player3", "down");
+                        break;
+                    case "arrowup":
+                        game.movePlattform("player4", "up");
+                        break;
+                    case "arrowdown":
+                        game.movePlattform("player4", "down");
+                        break;
+                }
             }
         }
     }

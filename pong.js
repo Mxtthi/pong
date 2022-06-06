@@ -77,7 +77,10 @@ class Game {
         clearInterval(game.move);
         if (document.getElementsByClassName("circle").length > 0) document.getElementsByClassName("circle")[0].remove();
         document.getElementById("gameWon").innerHTML = "";
-        game = new Game();
+        for (let i = 1; i <= game.player; i++) {
+            if (i <= 2 || i > 2 && game.player > 2) document.getElementById("player" + i).remove();
+        }
+        game = new Game(game.player);
         game.setScore();
     }
 
@@ -135,8 +138,8 @@ class Ball {
             }
             if (game.ball.getRandomInt(0, 1) == 0) game.ball.ySpeed *= -1;
             if (game.player > 2) {
-             game.ball.xSpeed*= 2;
-             game.ball.ySpeed*= 2;
+                game.ball.xSpeed *= 2;
+                game.ball.ySpeed *= 2;
             }
         }
 
@@ -175,7 +178,7 @@ class Ball {
 
             diffY = game.ball.getPos(playerArr[i]).top - game.ball.getPos(ball).top;
             diffX = game.ball.getPos(playerArr[i]).left - game.ball.getPos(ball).left;
-            
+
             if (game.checkIfElementsOverlap(ball, playerArr[i])) {
                 if (game.lastHit == game.teams[i + 1]) {
                     return;
@@ -186,7 +189,6 @@ class Ball {
                 }
             } else if (game.ball.xSpeed > 30 || game.ball.xSpeed < -30) {
                 if (((diffX > -100 && diffX < 0 && game.ball.xSpeed > 0) || (diffX < 100 && diffX > 0 && game.ball.xSpeed < 0)) && diffY < 0 && diffY > -window.innerHeight * 0.15) {
-                    console.log(diffY, window.innerHeight * 0.15)
                     if (game.lastHit == game.teams[i + 1]) {
                         return;
                     }
@@ -195,26 +197,48 @@ class Ball {
                         game.ball.changeDirection("x");
                     }
                     console.log(diffX, diffY, "HIT")
+                } else if (game.ball.xSpeed > 100 || game.ball.xSpeed < -100) {
+                    if (((diffX > -300 && diffX < 0 && game.ball.xSpeed > 0) || (diffX < 300 && diffX > 0 && game.ball.xSpeed < 0)) && diffY < 0 && diffY > -window.innerHeight * 0.15) {
+                        if (game.lastHit == game.teams[i + 1]) {
+                            return;
+                        }
+                        else {
+                            game.lastHit = game.teams[i + 1];
+                            game.ball.changeDirection("x");
+                        }
+                    }
+                } else if (game.ball.xSpeed > 200 || game.ball.xSpeed < -200) {
+                    if (((diffX > -500 && diffX < 0 && game.ball.xSpeed > 0) || (diffX < 500 && diffX > 0 && game.ball.xSpeed < 0)) && diffY < 0 && diffY > -window.innerHeight * 0.15) {
+                        if (game.lastHit == game.teams[i + 1]) {
+                            return;
+                        }
+                        else {
+                            game.lastHit = game.teams[i + 1];
+                            game.ball.changeDirection("x");
+                        }
+                    }
                 }
             }
         }
     }
 
     changeDirection(axis) {
+        let multiplicator;
         if (axis == "x") {
             if (game.ball.xSpeed > 0 && game.ball.xSpeed < window.innerWidth / 100 || game.ball.xSpeed < 0 && game.ball.xSpeed * -1 < window.innerWidth / 100) {
-                game.ball.xSpeed *= 2;
+                multiplicator = 2;
             } else if (game.ball.xSpeed > 0 && game.ball.xSpeed < window.innerWidth / 75 || game.ball.xSpeed < 0 && game.ball.xSpeed * -1 < window.innerWidth / 75) {
-                game.ball.xSpeed *= 1.5;
+                multiplicator = 1.5;
             } else if (game.ball.xSpeed > 0 && game.ball.xSpeed < window.innerWidth / 30 || game.ball.xSpeed < 0 && game.ball.xSpeed * -1 < window.innerWidth / 30) {
-                game.ball.xSpeed *= 1.1;
+                multiplicator = 1.1;
             } else if (game.ball.xSpeed > 0 && game.ball.xSpeed < window.innerWidth / 10 || game.ball.xSpeed < 0 && game.ball.xSpeed * -1 < window.innerWidth / 10) {
-                game.ball.xSpeed *= 1.05;
+                multiplicator = 1.05;
             } else {
-                game.ball.xSpeed *= 1.01;
+                multiplicator = 1.01;
             }
+            game.ball.xSpeed *= multiplicator;
+            game.ball.ySpeed *= multiplicator;
             game.ball.xSpeed *= -1;
-            game.ball.ySpeed *= 1.02;
             console.log(game.ball.xSpeed)
         }
         if (axis == "y") {
