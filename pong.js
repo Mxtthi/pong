@@ -6,7 +6,7 @@ class Game {
         this.isPaused = false;
         this.isFinished = false;
         this.lastHit;
-        this.movement = window.innerHeight / 100;
+        this.movement = window.innerHeight / 75;
         this.score = { "team1": 0, "team2": 0 }
 
         this.ball = new Ball();
@@ -69,7 +69,7 @@ class Game {
             document.getElementById("gameWon").innerHTML = "Paused";
         } else if (game.isPaused == false && game.isRunning == true && game.move == "") {
             document.getElementById("gameWon").innerHTML = "";
-            game.move = setInterval(game.ball.moveBall, 3, game.ball);
+            game.move = setInterval(game.ball.moveBall, 15, game.ball);
         }
     }
 
@@ -137,14 +137,10 @@ class Ball {
                 game.lastHit = "T1";
             }
             if (game.ball.getRandomInt(0, 1) == 0) game.ball.ySpeed *= -1;
-            if (game.player > 2) {
-                game.ball.xSpeed *= 2;
-                game.ball.ySpeed *= 2;
-            }
         }
 
-        game.ball.x += game.ball.xSpeed / 3;
-        game.ball.y += game.ball.ySpeed / 3;
+        game.ball.x += game.ball.xSpeed;
+        game.ball.y += game.ball.ySpeed;
 
         document.getElementsByClassName("circle")[0].style.left = game.ball.x + "px";
         document.getElementsByClassName("circle")[0].style.top = game.ball.y + "px";
@@ -225,13 +221,13 @@ class Ball {
     changeDirection(axis) {
         let multiplicator;
         if (axis == "x") {
-            if (game.ball.xSpeed > 0 && game.ball.xSpeed < window.innerWidth / 100 || game.ball.xSpeed < 0 && game.ball.xSpeed * -1 < window.innerWidth / 100) {
+            if (game.ball.xSpeed > 0 && game.ball.xSpeed < window.innerWidth / 200 || game.ball.xSpeed < 0 && game.ball.xSpeed * -1 < window.innerWidth / 200) {
                 multiplicator = 2;
-            } else if (game.ball.xSpeed > 0 && game.ball.xSpeed < window.innerWidth / 75 || game.ball.xSpeed < 0 && game.ball.xSpeed * -1 < window.innerWidth / 75) {
+            } else if (game.ball.xSpeed > 0 && game.ball.xSpeed < window.innerWidth / 150 || game.ball.xSpeed < 0 && game.ball.xSpeed * -1 < window.innerWidth / 150) {
                 multiplicator = 1.5;
-            } else if (game.ball.xSpeed > 0 && game.ball.xSpeed < window.innerWidth / 30 || game.ball.xSpeed < 0 && game.ball.xSpeed * -1 < window.innerWidth / 30) {
+            } else if (game.ball.xSpeed > 0 && game.ball.xSpeed < window.innerWidth / 100 || game.ball.xSpeed < 0 && game.ball.xSpeed * -1 < window.innerWidth / 100) {
                 multiplicator = 1.1;
-            } else if (game.ball.xSpeed > 0 && game.ball.xSpeed < window.innerWidth / 10 || game.ball.xSpeed < 0 && game.ball.xSpeed * -1 < window.innerWidth / 10) {
+            } else if (game.ball.xSpeed > 0 && game.ball.xSpeed < window.innerWidth / 25 || game.ball.xSpeed < 0 && game.ball.xSpeed * -1 < window.innerWidth / 25) {
                 multiplicator = 1.05;
             } else {
                 multiplicator = 1.01;

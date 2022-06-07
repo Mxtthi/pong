@@ -5,8 +5,8 @@ document.addEventListener("keydown",
         if (game !== undefined && !game.isRunning && !game.isFinished) {
             game.isRunning = true;
             document.getElementById("gameWon").innerHTML = "";
-            game.move = setInterval(game.ball.moveBall, 3, game.ball);
-            game.pauseCheck = setInterval(game.pauseOrContinueGame, 1);
+            game.move = setInterval(game.ball.moveBall, 15, game.ball);
+            game.pauseCheck = setInterval(game.pauseOrContinueGame, 15);
         }
         if (game !== undefined && keys.includes(e.key) === false) {
             if (e.key == "Tab") {
@@ -77,4 +77,4 @@ setInterval(() => {
             }
         }
     }
-}, 10);
+}, 15);
