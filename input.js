@@ -6,7 +6,7 @@ document.addEventListener("keydown",
             game.isRunning = true;
             document.getElementById("gameWon").innerHTML = "";
             game.move = setInterval(game.ball.moveBall, 15, game.ball);
-            game.pauseCheck = setInterval(game.pauseOrContinueGame, 15);
+            game.pauseCheck = setInterval(game.pauseOrContinueGame, 1);
         }
         if (game !== undefined && keys.includes(e.key) === false) {
             if (e.key == "Tab") {

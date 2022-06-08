@@ -128,8 +128,8 @@ class Ball {
 
     moveBall() {
         if (game.ball.xSpeed == 0 && game.ball.ySpeed == 0) {
-            game.ball.xSpeed = window.innerWidth / game.ball.getRandomInt(100, 200);
-            game.ball.ySpeed = window.innerHeight / game.ball.getRandomInt(150, 500);
+            game.ball.xSpeed = window.innerWidth / game.ball.getRandomInt(250, 400);
+            game.ball.ySpeed = window.innerHeight / game.ball.getRandomInt(300, 600);
             if (game.ball.getRandomInt(0, 1) == 0) {
                 game.ball.xSpeed *= -1;
                 game.lastHit = "T2";
@@ -139,8 +139,8 @@ class Ball {
             if (game.ball.getRandomInt(0, 1) == 0) game.ball.ySpeed *= -1;
         }
 
-        game.ball.x += game.ball.xSpeed;
-        game.ball.y += game.ball.ySpeed;
+        game.ball.x += game.ball.xSpeed / 1.1;
+        game.ball.y += game.ball.ySpeed / 1.1;
 
         document.getElementsByClassName("circle")[0].style.left = game.ball.x + "px";
         document.getElementsByClassName("circle")[0].style.top = game.ball.y + "px";
@@ -184,34 +184,13 @@ class Ball {
                     game.ball.changeDirection("x");
                 }
             } else if (game.ball.xSpeed > 30 || game.ball.xSpeed < -30) {
-                if (((diffX > -100 && diffX < 0 && game.ball.xSpeed > 0) || (diffX < 100 && diffX > 0 && game.ball.xSpeed < 0)) && diffY < 0 && diffY > -window.innerHeight * 0.15) {
+                if (((diffX > -500 && diffX < 0 && game.ball.xSpeed > 0) || (diffX < 500 && diffX > 0 && game.ball.xSpeed < 0)) && diffY < 0 && diffY > -window.innerHeight * 0.15) {
                     if (game.lastHit == game.teams[i + 1]) {
                         return;
                     }
                     else {
                         game.lastHit = game.teams[i + 1];
                         game.ball.changeDirection("x");
-                    }
-                    console.log(diffX, diffY, "HIT")
-                } else if (game.ball.xSpeed > 100 || game.ball.xSpeed < -100) {
-                    if (((diffX > -300 && diffX < 0 && game.ball.xSpeed > 0) || (diffX < 300 && diffX > 0 && game.ball.xSpeed < 0)) && diffY < 0 && diffY > -window.innerHeight * 0.15) {
-                        if (game.lastHit == game.teams[i + 1]) {
-                            return;
-                        }
-                        else {
-                            game.lastHit = game.teams[i + 1];
-                            game.ball.changeDirection("x");
-                        }
-                    }
-                } else if (game.ball.xSpeed > 200 || game.ball.xSpeed < -200) {
-                    if (((diffX > -500 && diffX < 0 && game.ball.xSpeed > 0) || (diffX < 500 && diffX > 0 && game.ball.xSpeed < 0)) && diffY < 0 && diffY > -window.innerHeight * 0.15) {
-                        if (game.lastHit == game.teams[i + 1]) {
-                            return;
-                        }
-                        else {
-                            game.lastHit = game.teams[i + 1];
-                            game.ball.changeDirection("x");
-                        }
                     }
                 }
             }
@@ -221,13 +200,13 @@ class Ball {
     changeDirection(axis) {
         let multiplicator;
         if (axis == "x") {
-            if (game.ball.xSpeed > 0 && game.ball.xSpeed < window.innerWidth / 200 || game.ball.xSpeed < 0 && game.ball.xSpeed * -1 < window.innerWidth / 200) {
+            if (game.ball.xSpeed > 0 && game.ball.xSpeed < window.innerWidth / 250 || game.ball.xSpeed < 0 && game.ball.xSpeed * -1 < window.innerWidth / 250) {
                 multiplicator = 2;
-            } else if (game.ball.xSpeed > 0 && game.ball.xSpeed < window.innerWidth / 150 || game.ball.xSpeed < 0 && game.ball.xSpeed * -1 < window.innerWidth / 150) {
+            } else if (game.ball.xSpeed > 0 && game.ball.xSpeed < window.innerWidth / 200 || game.ball.xSpeed < 0 && game.ball.xSpeed * -1 < window.innerWidth / 200) {
                 multiplicator = 1.5;
-            } else if (game.ball.xSpeed > 0 && game.ball.xSpeed < window.innerWidth / 100 || game.ball.xSpeed < 0 && game.ball.xSpeed * -1 < window.innerWidth / 100) {
+            } else if (game.ball.xSpeed > 0 && game.ball.xSpeed < window.innerWidth / 150 || game.ball.xSpeed < 0 && game.ball.xSpeed * -1 < window.innerWidth / 150) {
                 multiplicator = 1.1;
-            } else if (game.ball.xSpeed > 0 && game.ball.xSpeed < window.innerWidth / 25 || game.ball.xSpeed < 0 && game.ball.xSpeed * -1 < window.innerWidth / 25) {
+            } else if (game.ball.xSpeed > 0 && game.ball.xSpeed < window.innerWidth / 100 || game.ball.xSpeed < 0 && game.ball.xSpeed * -1 < window.innerWidth / 100) {
                 multiplicator = 1.05;
             } else {
                 multiplicator = 1.01;
