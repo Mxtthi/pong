@@ -21,7 +21,11 @@ body {
 
 #settings input {
     height: 5vh;
-    width: 5vw;
+    width: 10vw;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 1vh;
 }
 
 #score {
@@ -55,12 +59,12 @@ body {
     height: 100vh;
 }
 
-#outlineLeft{
+#outlineLeft {
     left: 0;
     background-color: blue;
 }
 
-#outlineRight{
+#outlineRight {
     right: 0;
     background-color: red;
 }
