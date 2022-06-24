@@ -4,7 +4,6 @@ document.addEventListener("keydown",
     function (e) {
         if (game !== undefined && !game.isRunning && !game.isFinished) {
             game.isRunning = true;
-            game.startAudio();
             document.getElementById("gameWon").innerHTML = "";
             game.move = setInterval(game.ball.moveBall, 15, game.ball);
             game.pauseCheck = setInterval(game.pauseOrContinueGame, 1);

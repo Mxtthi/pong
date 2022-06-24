@@ -9,6 +9,9 @@ class Game {
         this.movement = window.innerHeight / 75;
         this.score = { "team1": 0, "team2": 0 }
 
+        this.audio = new Audio('./other/pingpong.mp3');
+        this.applause = new Audio('./other/applause.mp3');
+
         this.ball = new Ball();
         this.assignTeams();
         this.loadVisuals();
@@ -66,12 +69,10 @@ class Game {
         if (game.isPaused == true) {
             clearInterval(game.move)
             game.move = "";
-            game.pauseAudio();
             document.getElementById("gameWon").innerHTML = "Paused";
         } else if (game.isPaused == false && game.isRunning == true && game.move == "") {
             document.getElementById("gameWon").innerHTML = "";
             game.move = setInterval(game.ball.moveBall, 15, game.ball);
-            game.resumeAudio();
         }
     }
 
@@ -104,16 +105,9 @@ class Game {
         return !(pos1.top > pos2.bottom || pos1.right < pos2.left || pos1.bottom < pos2.top || pos1.left > pos2.right);
     }
 
-    startAudio() {
-		this.audio = new Audio('./other/pongchingchong.mp3');
-		this.audio.play();
-	}
-
-	pauseAudio() {
-        this.audio.pause();
-    }
-    
-    resumeAudio() {
-        this.audio.play();
+    playAudio() {
+        let clone = game.audio.cloneNode(true);
+        clone.volume = 0.5;
+        clone.play();
     }
 }

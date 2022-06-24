@@ -59,6 +59,9 @@ class Ball {
             if (game.score.team1 < 5 && game.score.team2 < 5) {
                 game.ball = new Ball();
             }
+            let clone = game.applause.cloneNode(true);
+            clone.volume = 0.25;
+            clone.play();
         };
 
         if (game.ball.y <= 0 || game.ball.y >= window.innerHeight - window.innerHeight / 50) {
@@ -71,6 +74,7 @@ class Ball {
             diffX = game.ball.getPos(playerArr[i]).left - game.ball.getPos(ball).left;
 
             if (game.checkIfElementsOverlap(ball, playerArr[i])) {
+                game.playAudio();
                 if (game.lastHit == game.teams[i + 1]) {
                     return;
                 }
@@ -88,6 +92,7 @@ class Ball {
                         game.ball.changeDirection("x");
                     }
                 }
+                game.playAudio();
             }
         }
     }
